@@ -11,10 +11,6 @@ import MenuAdmin from '../../components/menu-admin';
 import Footer from '../../components/footer-admin';
 
 
-//CHARTS
-import PluviometriaChartRibPreto from './Charts/pluviometriaChart';
-import BiomassaChartRibPreto from './Charts/biomassaChart';
-
 //Map
 import MapRibPreto from './Map/MapRibPreto';
 
@@ -71,17 +67,6 @@ export default function RibPreto() {
         <Container maxWidth="lg" className={classes.container}>
 
           <Grid container spacing={2}>
-
-            <Grid item>
-              {/* Chart Biomassa */}
-              <Paper elevation={3} className={classes.paper}>
-                <BiomassaChartRibPreto />
-              </Paper>
-
-              <Paper elevation={3} className={classes.paper}>
-                <PluviometriaChartRibPreto />
-              </Paper>
-            </Grid>
 
             <Grid item>
               {/* Mapa */}

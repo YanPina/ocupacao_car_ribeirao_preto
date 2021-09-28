@@ -9,14 +9,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
-
-            //CHARTS
-import BiomassaChartCentroSul from './Charts/biomassas.chart';
-import ProdutividadeCentroSul from './Charts/produtividade.chart';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,18 +52,6 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
 
-            <Grid item>
-              {/* Chart Biomassa */}
-              <Paper elevation={3} className={classes.paper}>
-                <BiomassaChartCentroSul />
-              </Paper>
-            </Grid>
-            <Grid item>
-              {/* Chart Biomassa */}
-              <Paper elevation={3} className={classes.paper}>
-                <ProdutividadeCentroSul />
-              </Paper>
-            </Grid>
           
           </Grid>
           <Box pt={4}>

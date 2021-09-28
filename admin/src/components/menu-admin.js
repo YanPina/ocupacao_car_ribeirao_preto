@@ -13,8 +13,6 @@ import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 import Logo from '../assets/img/logo_sigma.png'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
-
 
 
 //CSS
@@ -132,15 +130,6 @@ export default function MenuAdmin({title}) {
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                     {title}
                 </Typography>
-                <Button className={classes.button} size="small" variant="contained" color="secondary" href='/admin/ribpreto'>
-                    R.PRETO
-                </Button>
-                <Button className={classes.button} size="small" variant="contained" color="secondary" href='/admin/piracicaba'>
-                    PIRACICABA
-                </Button>
-                <Button className={classes.button} size="small" variant="contained" color="secondary" href='/admin/aracatuba'>
-                    ARAÇATUBA
-                </Button>
             </Toolbar>
         </AppBar>
         <Drawer

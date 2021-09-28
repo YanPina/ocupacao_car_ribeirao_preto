@@ -5,12 +5,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import TimelineIcon from '@material-ui/icons/Timeline';
-import MapIcon from '@material-ui/icons/Map';
-import StackedLineChartIcon from '@mui/icons-material/StackedLineChart';
 
 import { getToken, logout } from '../services/auth';
 import api from '../services/api';
@@ -23,33 +19,6 @@ export const mainListItems = (
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard"  />
-    </ListItem>
-    <ListItem button component='a' href='/admin/biomassas' >
-      <ListItemIcon>
-        <TimelineIcon />
-      </ListItemIcon>
-      <ListItemText primary="Biomassas" />
-    </ListItem>
-
-    <ListItem button component='a' href='/admin/pluviometrias'>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Pluviometrias" />
-    </ListItem>
-
-    <ListItem button component='a' href='/admin/produtividade'>
-      <ListItemIcon>
-        <StackedLineChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Produtividade" />
-    </ListItem>
-
-    <ListItem button component='a' href='/admin/mapas'>
-      <ListItemIcon>
-        <MapIcon />
-      </ListItemIcon>
-      <ListItemText primary="Mapas" />
     </ListItem>
     
     <ListItem button>
