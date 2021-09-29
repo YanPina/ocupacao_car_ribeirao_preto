@@ -7,8 +7,10 @@ const connection = new Sequelize(dbConfig);
 
 
 const User = require('../models/User');
+const Car = require('../models/Car');
+
 
 User.init(connection);
-
+Car.init(connection);
 
 module.exports = connection;

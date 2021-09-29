@@ -4,6 +4,7 @@ const routes = express.Router();
 
 //Controllers
 const UserController = require('./controllers/UserController');
+const CarController = require('./controllers/CarController');
 
 //Routes User
 routes.get('/api/users', UserController.index);
@@ -15,5 +16,7 @@ routes.get('/api/users.details/:id', UserController.details);
 routes.get('/api/users/checktoken', UserController.checkToken);
 routes.get('/api/users/destroytoken', UserController.destroyToken);
 
+//Routes CAR
+routes.get('/api/car', CarController.index);
 
 module.exports = routes;
