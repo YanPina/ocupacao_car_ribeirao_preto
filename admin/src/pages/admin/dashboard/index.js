@@ -27,19 +27,27 @@ const useStyles = makeStyles((theme) => ({
     content: {
       flexGrow: 1,
       height: '100vh',
+      width: '100vw',
       overflow: 'auto',
     },
     container: {
       margin: 0,
-      paddingTop: theme.spacing(2),
+      padding: 0,
+      paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
     },
     paper: {
-      padding: theme.spacing(3),
+      padding: theme.spacing(1.5),
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
-    }
+    },
+    papermap: {
+      padding: theme.spacing(0.5),
+      display: 'flex',
+      overflow: 'auto',
+      flexDirection: 'column',
+    },
   }));
 
 export default function Dashboard() {
@@ -63,20 +71,26 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
 
-            <Paper>
-              <ReactMapGL
-                  {...viewport}
-                  mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
-                  onViewportChange={nextViewport => setViewport(nextViewport)}
-                  mapStyle='mapbox://styles/yanpina/cku4pfpr80xvp17qonyh9oevt'
-              />
-            </Paper>
+            <Grid item >
+              <Paper elevation={3} className={classes.papermap} >
+                  <ReactMapGL
+                      {...viewport}
+                      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
+                      onViewportChange={nextViewport => setViewport(nextViewport)}
+                      mapStyle='mapbox://styles/yanpina/cku4pfpr80xvp17qonyh9oevt'
+                  />
+              </Paper>
+            </Grid>
+              
+            
+            <Grid item >
+              <Paper elevation={3} className={classes.paper}>
+                <Chart />
+              </Paper>
+            </Grid>
 
-            <Paper>
-              <Chart />
-            </Paper>
           </Grid>
 
           <Box pt={4}>
