@@ -16,9 +16,13 @@ routes.get('/api/users.details/:id', UserController.details);
 routes.get('/api/users/checktoken', UserController.checkToken);
 routes.get('/api/users/destroytoken', UserController.destroyToken);
 
+
 //Routes CAR
 routes.get('/api/car', CarController.index);
 routes.post('/api/car', CarController.create);
+routes.put('/api/car/:id', CarController.update);
+routes.delete('/api/car/:id', CarController.delete);
+
 
 
 module.exports = routes;

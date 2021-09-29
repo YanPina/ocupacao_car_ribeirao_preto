@@ -13,6 +13,11 @@ import Users from './pages/admin/users/index';
 import EditUsers from './pages/admin/users/edit.users';
 import CreateUsers from './pages/admin/users/create.users';
 
+//IMPORTS CAR
+import Car from './pages/admin/car/index'
+import EditCar from './pages/admin/car/edit.car'
+import CreateCar from './pages/admin/car/create.car'
+
 import PrivateRoute from './services/wAuth';
 
 export default function Routes(){
@@ -30,6 +35,10 @@ export default function Routes(){
                 <PrivateRoute path='/admin/users' exact component={Users} />
                 <PrivateRoute path='/admin/users/cadastrar' exact component={CreateUsers} />
                 <PrivateRoute path='/admin/users/editar/:id' exact component={EditUsers} />
+
+                <PrivateRoute path='/admin/car' exact component={Car} />
+                <PrivateRoute path='/admin/car/cadastrar' exact component={CreateCar} />
+                <PrivateRoute path='/admin/car/editar/:id' exact component={EditCar} />
 
             </Switch>
         </BrowserRouter>

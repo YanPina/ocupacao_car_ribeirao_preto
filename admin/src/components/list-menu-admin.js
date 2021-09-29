@@ -7,6 +7,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import MapIcon from '@material-ui/icons/Map';
 
 import { getToken, logout } from '../services/auth';
 import api from '../services/api';
@@ -19,6 +20,13 @@ export const mainListItems = (
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard"  />
+    </ListItem>
+
+    <ListItem button component='a' href='/admin/car'>
+      <ListItemIcon>
+        <MapIcon />
+      </ListItemIcon>
+      <ListItemText primary="Car" />
     </ListItem>
     
     <ListItem button>
