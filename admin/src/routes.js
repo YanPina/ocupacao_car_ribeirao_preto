@@ -36,9 +36,11 @@ export default function Routes(){
                 <PrivateRoute path='/admin/users/cadastrar' exact component={CreateUsers} />
                 <PrivateRoute path='/admin/users/editar/:id' exact component={EditUsers} />
 
+
+                                        {/* Routes Users */}
                 <PrivateRoute path='/admin/car' exact component={Car} />
-                <PrivateRoute path='/admin/car/cadastrar' exact component={CreateCar} />
-                <PrivateRoute path='/admin/car/editar/:id' exact component={EditCar} />
+                <PrivateRoute path='/admin/car/create' exact component={CreateCar} />
+                <PrivateRoute path='/admin/car/edit/:id' exact component={EditCar} />
 
             </Switch>
         </BrowserRouter>

@@ -59,76 +59,48 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function EditBiomassa() {
+export default function EditCar() {
   const classes = useStyles();
 
-  const [regiao, setRegiao] = useState('');
-  const [safra, setSafra] = useState('');
-  const [set, setSet] = useState('');
-  const [out, setOut] = useState('');
-  const [nov, setNov] = useState('');
-  const [dez, setDez] = useState('');
-  const [jan, setJan] = useState('');
-  const [fev, setFev] = useState('');
-  const [mar, setMar] = useState('');
-  const [abr, setAbr] = useState('');
-  const [mai, setMai] = useState('');
-  const [jun, setJun] = useState('');
-  const [jul, setJul] = useState('');
-  const [ago, setAgo] = useState('');
-  
+  const [sigla_uf, setSigla_uf] = useState('');
+  const [nm_mun, setNm_mun] = useState('');
+  const [car, setCar] = useState();
+  const [area_km2, setArea_km2] = useState();
+  const [percentual, setPercentual] = useState();
 
+  
   const {id} = useParams();
 
   useEffect(() => {
-    async function getBiomassa(){
-      var response = await api.get('/api/biomassas/'+id);
+    async function getCar(){
+      var response = await api.get('/api/car/'+id);
       
-      setRegiao(response.data.regiao);
-      setSafra(response.data.safra);
-      setSet(response.data.set);
-      setOut(response.data.out);
-      setNov(response.data.nov);
-      setDez(response.data.dez);
-      setJan(response.data.jan);
-      setFev(response.data.fev);
-      setMar(response.data.mar);
-      setAbr(response.data.abr);
-      setMai(response.data.mai);
-      setJun(response.data.jun);
-      setJul(response.data.jul);
-      setAgo(response.data.ago);
-
+      setSigla_uf(response.data.sigla_uf);
+      setNm_mun(response.data.nm_mun);
+      setCar(response.data.car);
+      setArea_km2(response.data.area_km2);
+      setPercentual(response.data.percentual);
     }
-    getBiomassa();
+    getCar();
   },[])
   //Vai receber as informações inseridas pelo usuário
   async function handleSubmit() {
 
     const data = {
-      regiao:regiao,
-      safra:safra,
-      set:set,
-      out:out,
-      nov:nov,
-      dez:dez,
-      jan:jan,
-      fev:fev,
-      mar:mar,
-      abr:abr,
-      mai:mai,
-      jun:jun,
-      jul:jul,
-      ago:ago
+        sigla_uf:sigla_uf,
+        nm_mun:nm_mun,
+        car:car,
+        area_km2:area_km2,
+        percentual:percentual,
     }
 
-    if(regiao!=='' && safra!==''){
-      const response = await api.put('/api/biomassas/'+id, data);
+    if(sigla_uf!=='' && nm_mun!==''){
+      const response = await api.put('/api/car/'+id, data);
 
       if(response.status===200){
-        window.location.href='/admin/biomassas'
+        window.location.href='/admin/car'
       } else{
-        alert('Erro ao atualizar o Biomassa!');
+        alert('Erro ao atualizar o Car!');
       }
     }else{
       alert('Por favor, insira os dados a serem atualizados.')
@@ -139,47 +111,48 @@ export default function EditBiomassa() {
     <div className={classes.root}>
       
   
-      <MenuAdmin title={'Biomassas'} />
+      <MenuAdmin title={'Car'} />
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item sm={12} >
-            <Button style={{marginBottom:18, marginRight:5}} variant='contained' href={'/admin/biomassas'} >
+            <Button style={{marginBottom:18, marginRight:5}} variant='contained' href={'/admin/car'} >
               <ArrowBackIcon />
               Voltar
             </Button>
-            <Button style={{marginBottom:18}} variant='contained' color='primary' href={'/admin/biomassas/create'} >
+            <Button style={{marginBottom:18}} variant='contained' color='primary' href={'/admin/car/create'} >
               <AddIcon />
               Cadastrar
             </Button>
               <Paper className={classes.paper}>
-                <h2>Atualizar Biomassa</h2>
+                <h2>Atualizar CAR</h2>
                 <Grid container spacing={4}>
+
                   <Grid item xs={12} sm={5}>
                     <TextField
                       required
-                      id="regiao"
-                      name="regiao"
-                      label="Região"
+                      id="sigla_uf"
+                      name="sigla_uf"
+                      label="Estado"
                       fullWidth
-                      autoComplete="regiao"
-                      value={regiao}
-                      onChange={e => setRegiao(e.target.value)}
+                      autoComplete="sigla_uf"
+                      value={sigla_uf}
+                      onChange={e => setSigla_uf(e.target.value)}
                     />
                   </Grid>
 
                   <Grid item xs={12} sm={5}>
                     <TextField
                       required
-                      id="safra"
-                      name="safra"
-                      label="Safra"
+                      id="nm_mun"
+                      name="nm_mun"
+                      label="Município"
                       fullWidth
-                      autoComplete="safra"
-                      value={safra}
-                      onChange={e => setSafra(e.target.value)}
+                      autoComplete="nm_mun"
+                      value={nm_mun}
+                      onChange={e => setNm_mun(e.target.value)}
                     />
                   </Grid>
                 </Grid>
@@ -188,159 +161,41 @@ export default function EditBiomassa() {
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
-                      id="set"
-                      name="set"
-                      label="Set"
+                      id="car"
+                      name="car"
+                      label="Car"
                       fullWidth
-                      autoComplete="set"
-                      value={set}
-                      onChange={e => setSet(e.target.value)}
+                      autoComplete="car"
+                      value={car}
+                      onChange={e => setCar(e.target.value)}
                     />
                   </Grid>
 
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
-                      id="out"
-                      name="out"
-                      label="Out"
+                      id="area_km2"
+                      name="area_km2"
+                      label="Área KM2"
                       fullWidth
-                      autoComplete="out"
-                      value={out}
-                      onChange={e => setOut(e.target.value)}
+                      autoComplete="area_km2"
+                      value={area_km2}
+                      onChange={e => setArea_km2(e.target.value)}
                     />
                   </Grid>
 
                   <Grid item xs={12} sm={3}>
                     <TextField
                       required
-                      id="nov"
-                      name="nov"
-                      label="Nov"
+                      id="percentual"
+                      name="percentual"
+                      label="Percentual de Ocupação"
                       fullWidth
-                      autoComplete="nov"
-                      value={nov}
-                      onChange={e => setNov(e.target.value)}
+                      autoComplete="percentual"
+                      value={percentual}
+                      onChange={e => setPercentual(e.target.value)}
                     />
                   </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="dez"
-                      name="dez"
-                      label="Dez"
-                      fullWidth
-                      autoComplete="dez"
-                      value={dez}
-                      onChange={e => setDez(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="jan"
-                      name="jan"
-                      label="Jan"
-                      fullWidth
-                      autoComplete="jan"
-                      value={jan}
-                      onChange={e => setJan(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="fev"
-                      name="fev"
-                      label="Fev"
-                      fullWidth
-                      autoComplete="fev"
-                      value={fev}
-                      onChange={e => setFev(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="mar"
-                      name="mar"
-                      label="Mar"
-                      fullWidth
-                      autoComplete="mar"
-                      value={mar}
-                      onChange={e => setMar(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="abr"
-                      name="abr"
-                      label="Abri"
-                      fullWidth
-                      autoComplete="abr"
-                      value={abr}
-                      onChange={e => setAbr(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="mai"
-                      name="mai"
-                      label="Mai"
-                      fullWidth
-                      autoComplete="mai"
-                      value={mai}
-                      onChange={e => setMai(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="jun"
-                      name="jun"
-                      label="Jun"
-                      fullWidth
-                      autoComplete="jun"
-                      value={jun}
-                      onChange={e => setJun(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="jul"
-                      name="jul"
-                      label="Jul"
-                      fullWidth
-                      autoComplete="jul"
-                      value={jul}
-                      onChange={e => setJul(e.target.value)}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} sm={3}>
-                    <TextField
-                      required
-                      id="ago"
-                      name="ago"
-                      label="Ago"
-                      fullWidth
-                      autoComplete="ago"
-                      value={ago}
-                      onChange={e => setAgo(e.target.value)}
-                    />
-                  </Grid>
-
 
                 <Grid item xs={12} sm={12}>
                   <Button onClick={handleSubmit} variant="contained" className={classes.btnSuccess} >
