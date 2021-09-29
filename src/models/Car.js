@@ -5,9 +5,9 @@ class Car extends Model {
         super.init({
             sigla_uf: DataTypes.STRING,
             nm_mun: DataTypes.STRING,
+            car: DataTypes.STRING,
             area_km2: DataTypes.FLOAT,
             percentual: DataTypes.FLOAT,
-
         }, {
             sequelize
         })

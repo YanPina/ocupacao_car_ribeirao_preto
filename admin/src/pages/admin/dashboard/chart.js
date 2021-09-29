@@ -6,25 +6,24 @@ import api from '../../../services/api';
 import Chart from "react-apexcharts"
 import chartOptions from './options_chart';
 
-
 export default function ChartRibPreto() {
 
   //Biomassas
-  const safrasRibpreto = [];
+  const carRibpreto = [];
   const seriesRibpreto = [];
 
   
   useEffect(() => {
     // Biomassas
-    api.get('/api/biomassas/regiao/RIB.PRETO').then(response => {
+    api.get('/api/car').then(response => {
       const RibPreto = response.data.map((item) => {
-        safrasRibpreto.push(item)
+        carRibpreto.push(item)
       })
-      for(var item in safrasRibpreto){
+      for(var item in carRibpreto){
         seriesRibpreto.push(
         {
-          name: `Safra ${safrasRibpreto[item].safra}`,
-          data: [safrasRibpreto[item].set, safrasRibpreto[item].out, safrasRibpreto[item].nov, safrasRibpreto[item].dez, safrasRibpreto[item].jan, safrasRibpreto[item].fev, safrasRibpreto[item].mar, safrasRibpreto[item].abr, safrasRibpreto[item].mai, safrasRibpreto[item].jun, safrasRibpreto[item].jul, safrasRibpreto[item].ago]
+          name: `Safra ${carRibpreto[item].car}`,
+          data: [carRibpreto[item].area_km2, carRibpreto[item].percentual]
         },
         )
       }
