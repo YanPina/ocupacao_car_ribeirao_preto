@@ -14,6 +14,7 @@ import Footer from '../../../components/footer-admin';
 
 import ReactMapGL from 'react-map-gl';
 
+import Chart from './chart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -72,7 +73,12 @@ export default function Dashboard() {
                   mapStyle='mapbox://styles/yanpina/cku4pfpr80xvp17qonyh9oevt'
               />
             </Paper>
+
+            <Paper>
+              <Chart />
+            </Paper>
           </Grid>
+
           <Box pt={4}>
             <Footer />
           </Box>
