@@ -53,28 +53,28 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function Biomassas() {
+export default function Car() {
   const classes = useStyles();
 
-  const [ biomassas, setBiomassas ] = useState([]);
+  const [ car, setCar ] = useState([]);
   const [ loading, setLoading ] = useState(true);
 
-  //Vai retornar todas as biomassas cadastrados
+  //Vai retornar todas as car cadastrados
   useEffect(() => {
-    async function loadBiomassas(){
-      const response = await api.get('/api/biomassas');
-      setBiomassas(response.data)
+    async function loadCar(){
+      const response = await api.get('/api/car');
+      setCar(response.data)
       setLoading(false);
     }
-    loadBiomassas();
+    loadCar();
   },[])
 
   async function handleDelete(id){
-    if(window.confirm("Deseja realmente excluir essa biomassa?")) {
-      var result = await api.delete('/api/biomassas/'+id);
+    if(window.confirm("Deseja realmente excluir esse Car?")) {
+      var result = await api.delete('/api/car/'+id);
 
       if(result.status === 200){
-        window.location.href = '/admin/biomassas';
+        window.location.href = '/admin/car';
       }else{
         alert('Ocorreu um erro. Por favor, tente novamente.')
       }
@@ -86,20 +86,20 @@ export default function Biomassas() {
     <div className={classes.root}>
       <CssBaseline />
   
-      <MenuAdmin title={'Biomassas'} />
+      <MenuAdmin title={'Car'} />
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item sm={12}>
-            <Button style={{marginBottom:18}} variant='contained' color='primary' href={'/admin/biomassas/create'} >
+            <Button style={{marginBottom:18}} variant='contained' color='primary' href={'/admin/car/create'} >
               <AddIcon />
-              Cadastrar Biomassa
+              Cadastrar Car
             </Button>
               <Paper className={classes.paper}>
 
-                  <h2>Lista de Biomassas</h2>
+                  <h2>Lista de Car</h2>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={12}>
                     
@@ -108,20 +108,11 @@ export default function Biomassas() {
                         <Table className={classes.table} aria-label="simple table">
                           <TableHead>
                             <TableRow >
-                              <TableCell className={classes.table} align="center">Região</TableCell>
-                              <TableCell className={classes.table} align="center">Safra</TableCell>
-                              <TableCell className={classes.table} align="center">Set</TableCell>
-                              <TableCell className={classes.table} align="center">Out</TableCell>
-                              <TableCell className={classes.table} align="center">Nov</TableCell>
-                              <TableCell className={classes.table} align="center">Dez</TableCell>
-                              <TableCell className={classes.table} align="center">Jan</TableCell>
-                              <TableCell className={classes.table} align="center">Fev</TableCell>
-                              <TableCell className={classes.table} align="center">Mar</TableCell>
-                              <TableCell className={classes.table} align="center">Abr</TableCell>
-                              <TableCell className={classes.table} align="center">Mai</TableCell>
-                              <TableCell className={classes.table} align="center">Jun</TableCell>
-                              <TableCell className={classes.table} align="center">Jul</TableCell>
-                              <TableCell className={classes.table} align="center">Ago</TableCell>
+                              <TableCell className={classes.table} align="center">Estado</TableCell>
+                              <TableCell className={classes.table} align="center">Município</TableCell>
+                              <TableCell className={classes.table} align="center">Car</TableCell>
+                              <TableCell className={classes.table} align="center">Área KM2</TableCell>
+                              <TableCell className={classes.table} align="center">Percentual de Ocupação</TableCell>
                               <TableCell className={classes.table} align="center">Data de Cadastro</TableCell>
                               <TableCell className={classes.table} align="center">Opções</TableCell>
                             </TableRow>
@@ -130,28 +121,19 @@ export default function Biomassas() {
                           <TableBody>
 
                             {/* Vai mapear todos as Biomassas cadastrados */}
-                            {biomassas.map((row) => (
+                            {car.map((row) => (
                               <TableRow key={row._id}>
                                 <TableCell className={classes.table} component="th" scope="row">
-                                  {row.regiao}
+                                  {row.sigla_uf}
                                 </TableCell>
-                                <TableCell align='center' >{row.safra}</TableCell>
-                                <TableCell align='center' >{row.set}</TableCell>
-                                <TableCell align='center' >{row.out}</TableCell>
-                                <TableCell align='center' >{row.nov}</TableCell>
-                                <TableCell align='center' >{row.dez}</TableCell>
-                                <TableCell align='center' >{row.jan}</TableCell>
-                                <TableCell align='center' >{row.fev}</TableCell>
-                                <TableCell align='center' >{row.mar}</TableCell>
-                                <TableCell align='center' >{row.abr}</TableCell>
-                                <TableCell align='center' >{row.mai}</TableCell>
-                                <TableCell align='center' >{row.jun}</TableCell>
-                                <TableCell align='center' >{row.jul}</TableCell>
-                                <TableCell align='center' >{row.ago}</TableCell>
+                                <TableCell align='center' >{row.nm_mun}</TableCell>
+                                <TableCell align='center' >{row.car}</TableCell>
+                                <TableCell align='center' >{row.area_km2}</TableCell>
+                                <TableCell align='center' >{row.percentual}</TableCell>
                                 <TableCell align='center' >{new Date(row.createdAt).toLocaleString('pt-br')}</TableCell>
                                 <TableCell>
                                   <ButtonGroup aria-label="outlined primary button group">
-                                    <Button style={{marginRight:5}} variant='contained' color='primary' href={'/admin/biomassas/edit/'+row.id} >
+                                    <Button style={{marginRight:5}} variant='contained' color='primary' href={'/admin/car/edit/'+row.id} >
                                       <CachedIcon />
                                     </Button>
                                     <Button variant='contained' color='secondary' onClick={() => handleDelete(row.id)} >
