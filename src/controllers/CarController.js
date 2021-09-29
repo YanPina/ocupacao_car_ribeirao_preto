@@ -2,7 +2,7 @@ const Car = require('../models/Car');
 
 module.exports = {
 
-    //Retorna todas as Car
+    //Retorna todas os Car
     async index(req, res) {
         const cars = await Car.findAll();
         return res.json(cars);
