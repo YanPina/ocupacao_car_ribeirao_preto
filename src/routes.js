@@ -18,5 +18,7 @@ routes.get('/api/users/destroytoken', UserController.destroyToken);
 
 //Routes CAR
 routes.get('/api/car', CarController.index);
+routes.post('/api/car', CarController.create);
+
 
 module.exports = routes;

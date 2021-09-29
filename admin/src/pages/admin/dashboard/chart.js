@@ -22,8 +22,8 @@ export default function ChartRibPreto() {
       for(var item in carRibpreto){
         seriesRibpreto.push(
         {
-          name: `Safra ${carRibpreto[item].car}`,
-          data: [carRibpreto[item].area_km2, carRibpreto[item].percentual]
+          name: `Car ${carRibpreto[item].car}`,
+          data: [carRibpreto[item].area_km2, carRibpreto[item].percentual,carRibpreto[item]]
         },
         )
       }
@@ -31,7 +31,8 @@ export default function ChartRibPreto() {
   },[])
 
   return (
-        <Chart 
+        <Chart
+            series={seriesRibpreto}
             options={chartOptions.options}
             height={350}
             width={400}
