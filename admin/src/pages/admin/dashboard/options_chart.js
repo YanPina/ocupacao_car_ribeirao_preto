@@ -1,42 +1,32 @@
 const chartOptions = {
     options: {
+        colors: ['#00ff0d', '#1f1745', '#ff0000'],
         chart: {
-          type: 'radialBar',
+          type: 'bar',
+          width:'100%'
+        },
+        labels: ['Ocupação Total', 'Ocupação Ativos', 'Ocupação Cancelados'],
+        dataLabels: {
+          enabled: true,
+          formatter: function (val) {
+            return val + "%"
+          }
         },
         plotOptions: {
-          radialBar: {
-            hollow: {
-              size: '70%',
-            }
+          bar: {
+            horizontal: false,
+            columnWidth: '100%',
+            endingShape: 'rounded',
+            dataLabels: {
+              position: 'top', // top, center, bottom
+            },
           },
         },
-        labels: ['Cricket'],
         title: {
           text: 'OCUPAÇÃO DE CAR - RIBEIRÃO PRETO',
           align: 'left',
         },
         yaxis: {title: {text: 'PERCENTUAL DE OCUPAÇÃO DE CAR'}},
-        dataLabels: {
-          enabled:true,
-          style: {fontSize: '10px', fontWeight: 'bold'},
-          background: {enabled: false}
-        },
-        xaxis: {
-          categories: ['Percentual de Ocupação Total', 'Percentual de Ocupação Ativos'],
-        },
-        stroke: {
-          colors: ['#fff']
-        },
-        fill: {
-          opacity: 0.8
-        },
-        legend: {
-          position: 'bottom',
-        },
-        grid: {
-            borderColor: '#e7e7e7',
-            row: {colors: ['#f3f3f3', 'transparent'],opacity: 0.5},
-        },
       }
 }
 

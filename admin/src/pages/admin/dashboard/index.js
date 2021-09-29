@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-
+import React, {useState, useEffect} from 'react';
+import api from '../../../services/api';
 
 //IMPORTS MATERIAL UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -61,6 +61,26 @@ export default function Dashboard() {
       longitude: -47.8208,
       zoom: 10
     });
+
+      //CAR RIBEIRÃO PRETO
+  const carRibpreto = [];
+  const seriesRibpreto = []
+
+  
+  useEffect(() => {
+    //CAR RIBEIRÃO PRETO
+    api.get('/api/car').then(response => {
+      const RibPreto = response.data.map((item) => {
+        carRibpreto.push(item)
+      })
+      for(var item in carRibpreto){
+        seriesRibpreto.push(
+          carRibpreto[item].percentual
+        )
+      }
+      console.log(seriesRibpreto)
+    })
+  },[])
 
   return (
     <div className={classes.root}>
