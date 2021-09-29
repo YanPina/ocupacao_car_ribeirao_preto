@@ -20,7 +20,7 @@ export default function MapRibPreto() {
             {...viewport}
             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
             onViewportChange={nextViewport => setViewport(nextViewport)}
-            mapStyle='mapbox://styles/yanpina/cktu0u1qk0ump17oau16t67kn'
+            mapStyle='mapbox://styles/yanpina/cktt00sjq06ae17pny3d4iwli'
         />
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 
 //IMPORTS MATERIAL UI
@@ -11,6 +11,9 @@ import Paper from '@material-ui/core/Paper';
 
 import MenuAdmin from '../../../components/menu-admin';
 import Footer from '../../../components/footer-admin';
+
+import ReactMapGL from 'react-map-gl';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'auto',
     },
     container: {
+      margin: 0,
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(1),
     },
@@ -40,6 +44,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
 
+    //MapBox
+    const [viewport, setViewport] = useState({
+      width: 730,
+      height: 700,
+      latitude: -21.1767,
+      longitude: -47.8208,
+      zoom: 10
+    });
 
   return (
     <div className={classes.root}>
@@ -52,7 +64,14 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
 
-          
+            <Paper>
+              <ReactMapGL
+                  {...viewport}
+                  mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
+                  onViewportChange={nextViewport => setViewport(nextViewport)}
+                  mapStyle='mapbox://styles/yanpina/cku4pfpr80xvp17qonyh9oevt'
+              />
+            </Paper>
           </Grid>
           <Box pt={4}>
             <Footer />
