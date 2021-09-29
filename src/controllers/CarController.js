@@ -14,6 +14,15 @@ module.exports = {
 
         res.status(200).json(cars);
     },
+    //Retorna apenas o Car que for referenciado por id
+    async details(req, res) {
+        const cars = await Car.findOne({
+            where: { 
+                id: req.params.id
+            }
+        });
+        return res.json(cars);
+    },
     async update(req, res) {
         const { sigla_uf, nm_mun, car, area_km2, percentual } = req.body;
 

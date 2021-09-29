@@ -21,7 +21,9 @@ routes.get('/api/users/destroytoken', UserController.destroyToken);
 routes.get('/api/car', CarController.index);
 routes.post('/api/car', CarController.create);
 routes.put('/api/car/:id', CarController.update);
+routes.get('/api/car/:id', CarController.details);
 routes.delete('/api/car/:id', CarController.delete);
+
 
 
 
