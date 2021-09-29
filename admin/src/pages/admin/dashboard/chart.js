@@ -4,7 +4,7 @@ import api from '../../../services/api';
 
 //CHARTS
 import Chart from "react-apexcharts"
-import optionsChart from './options_chart';
+import chartOptions from './options_chart';
 
 
 export default function ChartRibPreto() {
@@ -33,7 +33,7 @@ export default function ChartRibPreto() {
 
   return (
         <Chart 
-            options={optionsChart.options}
+            options={chartOptions.options}
             height={350}
             width={400}
         />

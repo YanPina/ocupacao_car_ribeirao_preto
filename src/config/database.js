@@ -3,7 +3,7 @@ module.exports = {
     host: 'localhost',
     username: 'postgres',
     password: 'realdev777',
-    database: 'sqlnode',
+    database: 'car_rp',
     define: {
         timestamps: true,
         underscored: true,

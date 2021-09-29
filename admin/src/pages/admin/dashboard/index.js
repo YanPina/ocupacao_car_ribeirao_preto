@@ -75,7 +75,7 @@ export default function Dashboard() {
             </Paper>
 
             <Paper>
-              <Chart />
+              {/* <Chart /> */}
             </Paper>
           </Grid>
 
