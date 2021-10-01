@@ -10,9 +10,10 @@ NodeJs e integração com o Banco de dados Postgresql.
 ![image](https://user-images.githubusercontent.com/40330135/135625923-920a8c38-ad0b-48a0-a924-a12834dbcb3b.png)
 
 ## Os dados foram obtidos através de um sistema Python que realiza operações de geoprocessamento utilizando a biblioteca Geopandas.
-- Possibilita a extração de dados geoespaciais de arquivos Shapefile de CAR(Cadastro Ambiental Rural), APP(Área de Preservação Permanente), Reserva Legal e Vegetação Nativa, e a obtenção dessas áreas de ocupação em KM2 e Porcentagem no município de Ribeirao Preto.
-- Utilizei a biblioteca Tkinter para criar uma interface de visualização dos dados extraídos, exportar planilha e GeoJSON dos dados.
-![image](https://user-images.githubusercontent.com/40330135/135629231-f37f7082-2731-4007-9aeb-aa600f56ac60.png)
+- Possibilita a extração de dados geoespaciais de arquivos Shapefile CAR de: Área do Imóvel, APP(Área de Preservação Permanente), Reserva Legal, Vegetação Nativa, Hidrografia, Área Consolidada, Uso Restrito e a obtenção dessas áreas de ocupação em KM2 e Porcentagem no município de Ribeirao Preto.
+- Utilizei a biblioteca Tkinter para criar uma interface de visualização dos dados extraídos, exportar planilha e gerar GeoJSON dos dados.
+
+![image](https://user-images.githubusercontent.com/40330135/135640869-3c46561d-90f4-4d3c-92fd-a03a61bb9d3a.png)
 
 
 
