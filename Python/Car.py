@@ -10,7 +10,7 @@ from tkinter.filedialog import asksaveasfile, asksaveasfilename
 
 #Janela
 janela = Tk()
-janela.title('Áreas CAR Ribeirão Preto')
+janela.title('Ocupação de Áreas de CAR - Ribeirão Preto')
 janela.geometry('710x300')
 janela.resizable(True, True)
 janela.minsize(width=700, height=300)
@@ -41,12 +41,20 @@ data_app = gpd.read_file('/home/yan-pina/Documents/Sigma/Projeto Sigma/Car/AREA 
 data_reserva_legal = gpd.read_file('/home/yan-pina/Documents/Sigma/Projeto Sigma/Car/AREA IMOVEL Ribeirão Preto/RESERVA_LEGAL/RESERVA_LEGAL.shp') #RESERVA_LEGAL
 data_vegetacao_nativa = gpd.read_file('/home/yan-pina/Documents/Sigma/Projeto Sigma/Car/AREA IMOVEL Ribeirão Preto/VEGETACAO_NATIVA/VEGETACAO_NATIVA.shp') #VEGETACAO_NATIVA
 
+data_hidrografia = gpd.read_file('/home/yan-pina/Documents/Sigma/Projeto Sigma/Car/AREA IMOVEL Ribeirão Preto/HIDROGRAFIA/HIDROGRAFIA.shp') #HIDROGRAFIA
+data_area_consolidada = gpd.read_file('/home/yan-pina/Documents/Sigma/Projeto Sigma/Car/AREA IMOVEL Ribeirão Preto/AREA_CONSOLIDADA/AREA_CONSOLIDADA.shp') #AREA_CONSOLIDADA
+data_uso_restrito = gpd.read_file('/home/yan-pina/Documents/Sigma/Projeto Sigma/Car/AREA IMOVEL Ribeirão Preto/USO_RESTRITO/USO_RESTRITO.shp') #USO_RESTRITO
+
 
         #DISSOLVE
 car_dissolve = data_car.dissolve(by='NOM_MUNICI')
 app_dissolve = data_app.dissolve()
 reserva_legal_dissolve = data_reserva_legal.dissolve()
 vegetacao_nativa_dissolve = data_vegetacao_nativa.dissolve()
+
+hidrografia_dissolve = data_hidrografia.dissolve()
+area_consolidada_dissolve = data_area_consolidada.dissolve()
+uso_restrito_dissolve = data_uso_restrito.dissolve()
 
 #-------------------------------------------------------------------------------------------------------------------
 area_total_df = []
@@ -64,6 +72,15 @@ def area_car_RibPreto():
     global vegetacao_nativa_df
     global vegetacao_nativa_geojson
 
+    global hidrografia_df
+    global hidrografia_geojson
+
+    global area_consolidada_df
+    global area_consolidada_geojson
+
+    global uso_restrito_df
+    global uso_restrito_geojson
+
     global df_results
 
             #AREA TOTAL DO CAR
@@ -79,7 +96,7 @@ def area_car_RibPreto():
             epsg = 32700 + band
             area_total = area_total.to_crs(epsg=epsg)
 
-    area_total['CAR'] = 'Área Total do CAR'
+    area_total['CAR'] = 'Área Imóvel'
     area_total['AREA_KM2'] = round(area_total['geometry'].area / 1000000,3)
     area_total['PERCENTUAL'] = round((area_total['AREA_KM2'] / data_rib_preto['AREA_KM2']) * 100,2)
 
@@ -176,6 +193,66 @@ def area_car_RibPreto():
 
     #Faz a união de todos os resultados Dataframe
     df_concat = pd.concat([area_total_df, app_df, reserva_legal_df, vegetacao_nativa_df])
+    df_results = df_concat.drop(['geometry', 'IDF', 'NOM_TEMA', 'NUM_AREA', 'CD_MUN'], axis=1)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+            #ÁREA HIDROGRAFIA
+    hidrografia = gpd.overlay(hidrografia_dissolve, data_rib_preto, how='intersection')
+
+    for idx, row in hidrografia.iterrows():
+        c = row.geometry.centroid
+        utm_x, utm_y, band, zone = utm.from_latlon(c.y, c.x)
+        if c.y > 0:  # Northern zone
+            epsg = 32600 + band
+        else:
+            epsg = 32700 + band
+            hidrografia = hidrografia.to_crs(epsg=epsg)
+    
+    hidrografia['NM_MUN'] = area_total['NM_MUN']
+    hidrografia['SIGLA_UF'] = area_total['SIGLA_UF']
+    hidrografia['CAR'] = 'Hidrografia'
+    hidrografia['AREA_KM2'] = round(hidrografia['geometry'].area / 1000000,3)
+    hidrografia['PERCENTUAL'] = round((hidrografia['AREA_KM2'] / data_rib_preto['AREA_KM2']) * 100,2)
+
+    hidrografia_df = pd.DataFrame(hidrografia)
+
+    #GERAR GEOJSON
+    hidrografia_geojson = hidrografia.drop(['IDF', 'NOM_TEMA', 'NUM_AREA', 'CD_MUN'], axis=1)
+    hidrografia_geojson = gpd.GeoDataFrame(hidrografia)
+    hidrografia_geojson = hidrografia_geojson.to_crs(epsg=4326)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            #ÁREA CONSOLIDADA
+    area_consolidada = gpd.overlay(area_consolidada_dissolve, data_rib_preto, how='intersection')
+
+    for idx, row in area_consolidada.iterrows():
+        c = row.geometry.centroid
+        utm_x, utm_y, band, zone = utm.from_latlon(c.y, c.x)
+        if c.y > 0:  # Northern zone
+            epsg = 32600 + band
+        else:
+            epsg = 32700 + band
+            area_consolidada = area_consolidada.to_crs(epsg=epsg)
+    
+    area_consolidada['NM_MUN'] = area_total['NM_MUN']
+    area_consolidada['SIGLA_UF'] = area_total['SIGLA_UF']
+    area_consolidada['CAR'] = 'Área Consolidada'
+    area_consolidada['AREA_KM2'] = round(area_consolidada['geometry'].area / 1000000,3)
+    area_consolidada['PERCENTUAL'] = round((area_consolidada['AREA_KM2'] / data_rib_preto['AREA_KM2']) * 100,2)
+
+    area_consolidada_df = pd.DataFrame(area_consolidada)
+
+    #GERAR GEOJSON
+    area_consolidada_geojson = area_consolidada.drop(['IDF', 'NOM_TEMA', 'NUM_AREA', 'CD_MUN'], axis=1)
+    area_consolidada_geojson = gpd.GeoDataFrame(area_consolidada)
+    area_consolidada_geojson = area_consolidada_geojson.to_crs(epsg=4326)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #Faz a união de todos os resultados Dataframe
+    df_concat = pd.concat([area_total_df, app_df, reserva_legal_df, vegetacao_nativa_df, hidrografia_df, area_consolidada_df])
     df_results = df_concat.drop(['geometry', 'IDF', 'NOM_TEMA', 'NUM_AREA', 'CD_MUN'], axis=1)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ const chartOptions = {
           },
         },
         title: {
-          text: 'OCUPAÇÃO DE CAR - RIBEIRÃO PRETO',
+          text: 'OCUPAÇÃO DE ÁREAS DE CAR - RIBEIRÃO PRETO',
           align: 'left',
         },
         yaxis: {title: {text: 'PERCENTUAL DE OCUPAÇÃO DE CAR'}},
