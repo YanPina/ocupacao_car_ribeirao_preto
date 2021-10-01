@@ -251,8 +251,35 @@ def area_car_RibPreto():
     area_consolidada_geojson = area_consolidada_geojson.to_crs(epsg=4326)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            #ÁREA USO RESTRITO
+    uso_restrito = gpd.overlay(uso_restrito_dissolve, data_rib_preto, how='intersection')
+
+    for idx, row in uso_restrito.iterrows():
+        c = row.geometry.centroid
+        utm_x, utm_y, band, zone = utm.from_latlon(c.y, c.x)
+        if c.y > 0:  # Northern zone
+            epsg = 32600 + band
+        else:
+            epsg = 32700 + band
+            uso_restrito = uso_restrito.to_crs(epsg=epsg)
+    
+    uso_restrito['NM_MUN'] = area_total['NM_MUN']
+    uso_restrito['SIGLA_UF'] = area_total['SIGLA_UF']
+    uso_restrito['CAR'] = 'Uso Restrito'
+    uso_restrito['AREA_KM2'] = round(uso_restrito['geometry'].area / 1000000,3)
+    uso_restrito['PERCENTUAL'] = round((uso_restrito['AREA_KM2'] / data_rib_preto['AREA_KM2']) * 100,2)
+
+    uso_restrito_df = pd.DataFrame(uso_restrito)
+
+    #GERAR GEOJSON
+    uso_restrito_geojson = uso_restrito.drop(['IDF', 'NOM_TEMA', 'NUM_AREA', 'CD_MUN'], axis=1)
+    uso_restrito_geojson = gpd.GeoDataFrame(uso_restrito)
+    uso_restrito_geojson = uso_restrito_geojson.to_crs(epsg=4326)
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------
     #Faz a união de todos os resultados Dataframe
-    df_concat = pd.concat([area_total_df, app_df, reserva_legal_df, vegetacao_nativa_df, hidrografia_df, area_consolidada_df])
+    df_concat = pd.concat([area_total_df, app_df, reserva_legal_df, vegetacao_nativa_df, hidrografia_df, area_consolidada_df, uso_restrito_df])
     df_results = df_concat.drop(['geometry', 'IDF', 'NOM_TEMA', 'NUM_AREA', 'CD_MUN'], axis=1)
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------
