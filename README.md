@@ -7,7 +7,7 @@ Mapbox para o mapa.
 - Seu Back-End foi feito através do Framework
 NodeJs e integração com o Banco de dados Postgresql.
 
-![image](https://user-images.githubusercontent.com/40330135/135679311-f96f6680-bbef-4b35-9772-457919496b50.png)
+![image](https://user-images.githubusercontent.com/40330135/135679557-38817b79-32f1-4f01-884f-5d1a851e1003.png)
 
 ## Os dados foram obtidos através de um sistema Python que realiza operações de geoprocessamento utilizando a biblioteca Geopandas.
 - Possibilita a extração de dados geoespaciais de arquivos Shapefile CAR de: Área do Imóvel, APP(Área de Preservação Permanente), Reserva Legal, Vegetação Nativa, Hidrografia, Área Consolidada, Uso Restrito e a obtenção dessas áreas de ocupação em KM2 e Porcentagem no município de Ribeirao Preto.
