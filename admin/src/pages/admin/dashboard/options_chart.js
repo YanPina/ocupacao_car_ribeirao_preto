@@ -1,6 +1,6 @@
 const chartOptions = {
     options: {
-        colors: ['#00ff0d', '#1f1745', '#ff0000', '#00ccff', '#fff152', '#3043d1', '#01020a'],
+        colors: ['#00ff0d', '#1f1745', '#ff0000', '#fff152', '#00ccff', '#3043d1', '#01020a'],
         chart: {
           type: 'bar',
           width:'100%'
@@ -26,9 +26,17 @@ const chartOptions = {
             },
           },
         },
+        dataLabels: {
+          enabled: true,
+          offsetY: -20,
+          style: {
+            fontSize: '12px',
+            colors: ["#000000"]
+          }
+        },
         title: {
-          text: 'OCUPAÇÃO DE ÁREA DE CAR - RIBEIRÃO PRETO',
-          align: 'left',
+          text: 'OCUPAÇÃO DE ÁREAS DE CAR - RIBEIRÃO PRETO',
+          align: 'center',
         },
         yaxis: {title: {text: 'PERCENTUAL DE OCUPAÇÃO DE CAR'}},
       }

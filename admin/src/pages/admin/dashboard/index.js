@@ -102,7 +102,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
   
-      <MenuAdmin title={'Dashboard'} />
+      <MenuAdmin title={'OCUPAÇÃO DE ÁREAS DE CAR DO MUNICÍPIO DE RIBEIRÃO PRETO'} />
 
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
