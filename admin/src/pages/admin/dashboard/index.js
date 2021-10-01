@@ -115,7 +115,7 @@ export default function Dashboard() {
                       {...viewport}
                       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
                       onViewportChange={nextViewport => setViewport(nextViewport)}
-                      mapStyle='mapbox://styles/yanpina/cku7vbiuq46tp19qj8om6ajyv'
+                      mapStyle='mapbox://styles/yanpina/cku8icem022z917nxu78alak9'
                   />
               </Paper>
             </Grid>

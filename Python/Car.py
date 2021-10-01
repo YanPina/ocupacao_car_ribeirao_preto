@@ -11,16 +11,16 @@ from tkinter.filedialog import asksaveasfile, asksaveasfilename
 #Janela
 janela = Tk()
 janela.title('Ocupação de Áreas de CAR - Ribeirão Preto')
-janela.geometry('710x300')
+janela.geometry('710x350')
 janela.resizable(True, True)
-janela.minsize(width=700, height=300)
+janela.minsize(width=700, height=350)
 #-------------------------------------------------------------------------------------------------------------------
 #Treeview que irá exibir os resultados
 label_result = LabelFrame(janela, borderwidth=1, relief='solid')
-label_result.place(x=10, y=70, width=700, height=150)
+label_result.place(x=10, y=70, width=700, height=185)
 
 tv = ttk.Treeview(label_result)
-tv.place(x=10, y=210, width=700, height=150)
+tv.place(x=10, y=210, width=700, height=185)
 
 tvscrollx = ttk.Scrollbar(label_result, orient='horizontal', command=tv.xview)
 tvscrolly = ttk.Scrollbar(label_result, orient='vertical', command=tv.yview)
@@ -299,13 +299,11 @@ def area_car_RibPreto():
 #-------------------------------------------------------------------------------------------------------------------
 #Salvar resultados em planilha
 def salvar_resultados_planilha():
-    # type_save = [('xlsx', '*.xlsx')]
-    # save_diretorio = filedialog.asksaveasfile(filetypes = type_save, defaultextension = type_save)
+
     df_results.to_excel("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/Resultados_CAR.xlsx", 'Planilha',index=False)
 
 def gerar_geo_json():
-    # type_save = [('xlsx', '*.xlsx')]
-    # save_diretorio = filedialog.asksaveasfile(filetypes = type_save, defaultextension = type_save)
+
     area_total_geojson.to_file("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/AreaTotal.geojson", driver='GeoJSON')
 
     app_geojson.to_file("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/APP.geojson", driver='GeoJSON')
@@ -314,6 +312,11 @@ def gerar_geo_json():
 
     vegetacao_nativa_geojson.to_file("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/VEGETACAO_NATIVA.geojson", driver='GeoJSON')
 
+    hidrografia_geojson.to_file("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/HIDROGRAFIA.geojson", driver='GeoJSON')
+
+    area_consolidada_geojson.to_file("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/AREA_CONSOLIDADA.geojson", driver='GeoJSON')
+
+    uso_restrito_geojson.to_file("/home/yan-pina/Documents/Sigma/Projeto Sigma/Resultados/USO_RESTRITO.geojson", driver='GeoJSON')
 
 #-------------------------------------------------------------------------------------------------------------------
 #Botão que mostrará o resultado geral
@@ -321,10 +324,10 @@ botao_result_geral = Button(janela, width=20, text="Mostrar resultados", command
 botao_result_geral.place(x=250, y=20) #Localização do botão na tela
 #------------------------------------------------------------------------------------------------------------------
 botao_salvar_planilha = Button(janela, width=25, text="Salvar resultados em planilha", command=salvar_resultados_planilha) #Conteudo do botão
-botao_salvar_planilha.place(x=100, y=250) #Localização do botão na tela
+botao_salvar_planilha.place(x=100, y=280) #Localização do botão na tela
 #-------------------------------------------------------------------------------------------------------------------
 botao_gerar_geojson = Button(janela, width=15, text="Gerar GeoJSON", command=gerar_geo_json) #Conteudo do botão
-botao_gerar_geojson.place(x=400, y=250) #Localização do botão na tela
+botao_gerar_geojson.place(x=400, y=280) #Localização do botão na tela
 
 #-------------------------------------------------------------------------------------------------------------------
 janela.mainloop()
