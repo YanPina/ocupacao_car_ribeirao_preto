@@ -48,6 +48,22 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'auto',
       flexDirection: 'column',
     },
+    map: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      width: '100vw'
+    },
+    legend: {
+      backgroundColor: '#fff',
+      borderRadius: '3px',
+      bottom: '30px',
+      boxShadow: '0 1px 2px',
+      padding: '10px',
+      position: 'absolute',
+      right: '10px',
+      zIndex: 1
+    }
   }));
 
 export default function Dashboard() {
@@ -56,7 +72,7 @@ export default function Dashboard() {
     //MapBox
     const [viewport, setViewport] = useState({
       width: 730,
-      height: 700,
+      height: 500,
       latitude: -21.1767,
       longitude: -47.8208,
       zoom: 10
@@ -103,7 +119,6 @@ export default function Dashboard() {
                   />
               </Paper>
             </Grid>
-              
             
             <Grid item >
               <Paper elevation={3} className={classes.paper}>
@@ -117,6 +132,7 @@ export default function Dashboard() {
             <Footer />
           </Box>
         </Container>
+        
       </main>
     </div>
   );

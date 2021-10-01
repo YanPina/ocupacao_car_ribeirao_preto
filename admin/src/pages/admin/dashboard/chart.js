@@ -35,7 +35,7 @@ export default function ChartRibPreto() {
             series={seriesRibpreto}
             options={chartOptions.options}
             type='bar'
-            height={450}
+            height={468}
             width={510}
         />
   )
